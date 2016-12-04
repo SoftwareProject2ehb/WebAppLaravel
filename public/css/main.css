@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: linear-gradient(30deg, #f2f2f2, #d1d1d1);
+    min-height: 100vh;
+    max-height: auto;
+}
+
+#search{
+    height: auto;
+}
+
+.spaced{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.result{
+    height: auto;
+    background: rgba(0,0,0, 0.1);
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: content-box;
+    margin-bottom: 20px;
+}
+
+.status{
+    font-size: 0.83em;
+}
+
+.on-time{
+    color: limegreen;
+}
+
+.delayed{
+    color: orange;
+}
+
+.cancelled{
+    color: indianred;
+}
+
