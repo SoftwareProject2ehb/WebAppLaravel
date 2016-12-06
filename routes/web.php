@@ -12,15 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('route');
 })->name('home');
 Route::get('/route/', function () {
-    return view('index');
+    return view('route');
 })->name('home');
+
+
 
 Route::get('/tickets/', function () {
     return view('tickets');
 })->name('tickets');
+
 Route::get('/about/', function () {
-    return view('tickets');
+    return view('about');
 })->name('about');
+
+Route::post('route', 'routeController@getRoutes');
