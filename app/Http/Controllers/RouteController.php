@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\LastStop;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -20,7 +21,8 @@ public function getRoutes(Request $request)
         $response = $client->request('GET', (string) $traintracksString, ['verify' => false]);
         $result = json_decode($response->getBody());
     } catch (ClientException $e) { } catch (ServerException $e) { }
-    $routes = array();
+
+    $ls = new LastStop();
     if ($result != null) {
         foreach ($result->Routes as $route) {
             if(!empty($route->TransferStations) && !empty($route->Trains)){
@@ -33,12 +35,28 @@ public function getRoutes(Request $request)
                     $date = date('H:i', strtotime($transferStation->StepOverTime));
                     $transferStation->StepOverTime = $date;
 
+
+
+                    }
+
+                foreach(end($route->Trains)->Stops->Stations as $station)
+                {
+
+                    if($station->Name == $result->StepOff)
+                    {
+                        $date = date('H:i', strtotime($station->Time->Arrival));
+                        $ls->time = $date;
+                        $ls->platform = $station->ArrivalPlatform;
+                    }
                 }
 
             }
-            array_push($routes,$route);
+
         }
-        return view('search')->with('result',$result)->with('routes',$routes);
+
+
+
+        return view('search')->with('result',$result)->with('lastStop',$ls);
     }
     else{
 

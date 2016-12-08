@@ -12,8 +12,10 @@
 
 
 
-    @for ($i=0; $i < sizeof($routes);$i++)
+  @foreach($result->Routes as $route)
 
+      @if(!empty($route->TransferStations) && !empty($route->Trains))
+    @if (!empty($route->TransferStations) )
         <div class="row">
             <div class="col-md-2 col-xs-5">
                 <h4><span class="glyphicon glyphicon-time status on-time"></span></h4>
@@ -21,176 +23,71 @@
             <div class="col-md-10 col-xs-7">
                 <h4>{!! $result->StepOn !!} , {!! $result->StepOff !!}</h4>
             </div>
+        </div>
+    @endif
 
-
-
+    <div class="result">
+        <div class="row">
 
             @foreach($route->TransferStations as $ts)
-            <div class="result">
-                <div class="row">
-                    <div class="col-md-5 col-xs-5">
-                        <h5>
-                            {!! $result->Stepon !!}
-                        </h5>
-                    </div>
-                    <div class="col-md-7 col-xs-7">
-                        <h5>
-                            <br>
-                            12:45
-                        </h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 col-xs-5">
 
-                    </div>
-                    <div class="col-md-7 col-xs-7">
-                        <h5>There are currently no delays</h5>
-                    </div>
-                </div>
-                <div class="row">
+                        @if($ts->TransferAt == null)
                     <div class="col-md-5 col-xs-5">
-                        <h5>Brussel-Zuid</h5>
+                        <h4>
+                            {!! $result->StepOn !!}
+                        </h4>
                     </div>
-                    <div class="col-md-7 col-xs-7">
+                        @else
+                    <div class="col-md-5 col-xs-5" style="padding-left: 5em" >
                         <h5>
-                            Spoor 15<br>
-                            13:30
+                            {!! $ts->TransferAt !!}
                         </h5>
                     </div>
-                </div>
-            </div>
+                        @endif
+
+
+
+
+
+                    <div class="col-md-7 col-xs-7">
+                        <h5>
+
+                            spoor {!! $ts->ArrivalPlatform !!}
+                            </br>
+                            {!! $ts->DepartureTime !!}
+                        </h5>
+                    </div>
+
+
+
+
 
     @endforeach
-    @endfor
+        </div>
                 <div class="row">
-                    <div class="col-md-2 col-xs-5">
-                        <h4><span class="glyphicon glyphicon-time status on-time"></span> IC 5678</h4>
+                    <div class="col-md-5 col-xs-5">
+                        <h4>
+                            {!! $result->StepOff !!}
+                        </h4>
                     </div>
-                    <div class="col-md-10 col-xs-7">
-                        <h4>Antwerpen-Centraal - Brussel-Zuid</h4>
-                    </div>
-               </div>
-                <div class="result">
-                    <div class="row">
-                        <div class="col-md-5 col-xs-5">
-                            <h5>
-                                Antwerpen-Centraal
-                            </h5>
-                        </div>
-                        <div class="col-md-7 col-xs-7">
-                            <h5>
-                                Spoor 24<br>
-                                12:45
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 col-xs-5">
-
-                        </div>
-                        <div class="col-md-7 col-xs-7">
-                            <h5>There are currently no delays</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 col-xs-5">
-                            <h5>Brussel-Zuid</h5>
-                        </div>
-                        <div class="col-md-7 col-xs-7">
-                            <h5>
-                                Spoor 15<br>
-                                13:30
-                            </h5>
-                        </div>
+                    <div class="col-md-7 col-xs-7">
+                        <h5>
+                          spoor {!! $lastStop->platform  !!} <br>
+                            {!! $lastStop->time !!}
+                        </h5>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-2 col-xs-5">
-                        <h4><span class="glyphicon glyphicon-time status cancelled"></span> IC 9876</h4>
-                    </div>
-                    <div class="col-md-10 col-xs-7">
-                        <h4>Antwerpen-Centraal - Brussel-Zuid</h4>
-                    </div>
-               </div>
-                <div class="result">
-                    <div class="row">
-                        <div class="col-md-5 col-xs-5">
-                            <h5>
-                                Antwerpen-Centraal
-                            </h5>
-                        </div>
-                        <div class="col-md-7 col-xs-7">
-                            <h5>
-                                Spoor 24<br>
-                                13:30
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 col-xs-5">
+    </div>
 
-                        </div>
-                        <div class="col-md-7 col-xs-7">
-                            <h5>This train is cancelled</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 col-xs-5">
-                            <h5>Brussel-Zuid</h5>
-                        </div>
-                        <div class="col-md-7 col-xs-7">
-                            <h5>
-                                Spoor 15<br>
-                                14:15
-                            </h5>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-2 col-xs-5">
-                        <h4><span class="glyphicon glyphicon-time status cancelled"></span> IC 9876</h4>
-                    </div>
-                    <div class="col-md-10 col-xs-7">
-                        <h4>Antwerpen-Centraal - Brussel-Zuid</h4>
-                    </div>
-               </div>
-                <div class="result">
-                    <div class="row">
-                        <div class="col-md-5 col-xs-5">
-                            <h5>
-                                Antwerpen-Centraal
-                            </h5>
-                        </div>
-                        <div class="col-md-7 col-xs-7">
-                            <h5>
-                                Spoor 24<br>
-                                13:30
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 col-xs-5">
 
-                        </div>
-                        <div class="col-md-7 col-xs-7">
-                            <h5>This train is cancelled</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 col-xs-5">
-                            <h5>Brussel-Zuid</h5>
-                        </div>
-                        <div class="col-md-7 col-xs-7">
-                            <h5>
-                                Spoor 15<br>
-                                14:15
-                            </h5>
-                        </div>
-                    </div>
-                </div>
+@endif
+  @endforeach
+
+
+
+
 @stop
 
 @section ('footer')
