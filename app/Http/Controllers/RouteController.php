@@ -6,14 +6,26 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
+use Log;
 
 class RouteController extends Controller{
+
 
 public function getRoutes(Request $request)
 {
     $stepOn = $request->input('from');
     $stepOff = $request->input('to');
+
+    // check if string contains '/'
+    if(strpos($stepOn, '/') !== false){
+       $stepOn= strtok($stepOn,'/');
+    }
+    if(strpos($stepOff, '/') !== false){
+        $stepOff= strtok($stepOff,'/');
+    }
+
     $traintracksString = $stepOn . "/" . $stepOff;
+
     $client = new Client(['base_uri' => 'https://traintracks.online/api/Route/']);
     $result = null;
     try {
@@ -30,10 +42,13 @@ public function getRoutes(Request $request)
 
                     $date = date('H:i', strtotime($transferStation->ArrivalTime));
                     $transferStation->ArrivalTime = $date;
+                    echo ( $transferStation->ArrivalTime .  "<br>");
                     $date = date('H:i', strtotime($transferStation->DepartureTime));
                     $transferStation->DepartureTime = $date;
+                    echo ( $transferStation->DepartureTime.  "<br>");
                     $date = date('H:i', strtotime($transferStation->StepOverTime));
                     $transferStation->StepOverTime = $date;
+                    echo ( $transferStation->StepOverTime.  "<br>");
 
 
 
@@ -45,9 +60,9 @@ public function getRoutes(Request $request)
                     if($station->Name == $result->StepOff)
                     {
                         $date = date('H:i', strtotime($station->Time->Arrival));
-                        $ls->time = $date;
-                        $ls->platform = $station->ArrivalPlatform;
-                    }
+                        $station->Time->Arrival = $date;
+
+                }
                 }
 
             }
@@ -62,15 +77,7 @@ public function getRoutes(Request $request)
 
     return view('failed');
     }
-
-
 }
-
-
-
-
-
-
 }
 
 

@@ -72,8 +72,12 @@
                     </div>
                     <div class="col-md-7 col-xs-7">
                         <h5>
-                          spoor {!! $lastStop->platform  !!} <br>
-                            {!! $lastStop->time !!}
+                            @foreach(end($route->Trains)->Stops->Stations as $station)
+                                @if($station->Name == $result->StepOff )
+                          spoor {!! $station->Platform !!} <br>
+                            {!! $station->Time->Arrival !!}
+                                @endif
+                                @endforeach
                         </h5>
                     </div>
                 </div>
