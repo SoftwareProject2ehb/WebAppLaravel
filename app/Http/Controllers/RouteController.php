@@ -23,32 +23,43 @@ public function getRoutes(Request $request)
     if(strpos($stepOff, '/') !== false){
         $stepOff= strtok($stepOff,'/');
     }
+        echo ($stepOn.$stepOff);
+    $traintracksString = "?to=".$stepOff."&from=".$stepOn."&format=json";
 
-    $traintracksString = $stepOn . "/" . $stepOff;
+    $client = new Client(['base_uri' => 'https://api.irail.be/connections/']);
 
-    $client = new Client(['base_uri' => 'https://traintracks.online/api/Route/']);
     $result = null;
     try {
-
+        echo($traintracksString);
         $response = $client->request('GET', (string) $traintracksString, ['verify' => false]);
         $result = json_decode($response->getBody());
     } catch (ClientException $e) { } catch (ServerException $e) { }
-
-    $ls = new LastStop();
     if ($result != null) {
+
+
+
+
+        return view("search")->with("result",$result);
+    }
+    else{return view('failed');};
+
+
+
+
+   /* if ($result != null) {
         foreach ($result->Routes as $route) {
             if(!empty($route->TransferStations) && !empty($route->Trains)){
                 foreach ($route->TransferStations as $transferStation) {
 
                     $date = date('H:i', strtotime($transferStation->ArrivalTime));
                     $transferStation->ArrivalTime = $date;
-                    echo ( $transferStation->ArrivalTime .  "<br>");
+                    //echo ( $transferStation->ArrivalTime .  "<br>");
                     $date = date('H:i', strtotime($transferStation->DepartureTime));
                     $transferStation->DepartureTime = $date;
-                    echo ( $transferStation->DepartureTime.  "<br>");
-                    $date = date('H:i', strtotime($transferStation->StepOverTime));
-                    $transferStation->StepOverTime = $date;
-                    echo ( $transferStation->StepOverTime.  "<br>");
+                    //echo ( $transferStation->DepartureTime.  "<br>");
+                    //$date = date('H:i', strtotime($transferStation->StepOverTime));
+                   // $transferStation->StepOverTime = $date;
+                   // echo ( $transferStation->StepOverTime.  "<br>");
 
 
 
@@ -67,16 +78,16 @@ public function getRoutes(Request $request)
 
             }
 
-        }
 
 
+}
 
         return view('search')->with('result',$result)->with('lastStop',$ls);
     }
-    else{
+    else{*/
 
-    return view('failed');
-    }
+
+
 }
 }
 

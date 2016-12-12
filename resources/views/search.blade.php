@@ -9,13 +9,90 @@
 @stop
 
 @section ('content')
+    @foreach($result->connection as $route)
+    <div class="row">
+        <div class="col-md-2 col-xs-5">
+            <h4><span class="glyphicon glyphicon-time status on-time"></span></h4>
+        </div>
 
 
 
-  @foreach($result->Routes as $route)
+        <div class="col-md-10 col-xs-7">
+            <h4>{!! $route->departure->stationinfo->standardname !!} , {!! $route->arrival->stationinfo->standardname !!}</h4>
+        </div>
+    </div>
 
-      @if(!empty($route->TransferStations) && !empty($route->Trains))
-    @if (!empty($route->TransferStations) )
+    <div class="result">
+        <div class="row">
+
+
+            <div class="col-md-5 col-xs-5">
+
+                <h4>
+                    {!! $route->departure->stationinfo->standardname !!} ({!! $route->departure->vehicle  !!})
+                </h4>
+
+            </div>
+            <div class="col-md-7 col-xs-7">
+                <h5>
+                    spoor {!! $route->departure->platform !!}
+                    </br>
+                    {!! gmdate('H:i',$route->departure->time) !!}
+
+                </h5>
+            </div>
+        </div>
+        @if(property_exists($route,"vias"))
+            @foreach($route->vias->via as $via)
+                <div class="row">
+                <div class="col-md-5 col-xs-5" style="padding-left: 5em" >
+                    <h5  >
+                        {!! $via->stationinfo->standardname !!} ({!! $via->vehicle !!})
+                    </h5>
+                </div>
+
+
+                    <div class="col-md-7 col-xs-7">
+                        <h5>
+                            spoor {!! $via->departure->platform !!}
+                            </br>
+                            {!! gmdate('H:i',$via->departure->time) !!}
+                        </h5>
+                    </div>
+                </div >
+            @endforeach
+        @endif
+
+
+            <div class="row">
+
+
+                <div class="col-md-5 col-xs-5">
+
+                    <h4>
+                        {!! $route->arrival->stationinfo->standardname !!}
+                    </h4>
+
+                </div>
+                <div class="col-md-7 col-xs-7">
+                    <h5>
+                        spoor {!! $route->arrival->platform !!}
+                        </br>
+                        {!! gmdate('H:i',$route->arrival->time) !!}
+
+                    </h5>
+                </div>
+
+        </div>
+
+    </div>
+@endforeach
+
+
+ {{-- @foreach($result->Routes as $route)
+
+      @if(!empty($route->TransferStations) && !empty($route->Trains) && $route->TransferStations[0]->ArrivalPlatform !== null)
+    @if (!empty($route->TransferStations)  )
         <div class="row">
             <div class="col-md-2 col-xs-5">
                 <h4><span class="glyphicon glyphicon-time status on-time"></span></h4>
@@ -34,13 +111,13 @@
                         @if($ts->TransferAt == null)
                     <div class="col-md-5 col-xs-5">
                         <h4>
-                            {!! $result->StepOn !!}
+                            {!! $result->StepOn !!} ({!! $ts->FullId  !!})
                         </h4>
                     </div>
                         @else
                     <div class="col-md-5 col-xs-5" style="padding-left: 5em" >
                         <h5>
-                            {!! $ts->TransferAt !!}
+                            {!! $ts->TransferAt !!} ({!! $ts->FullId  !!})
                         </h5>
                     </div>
                         @endif
@@ -54,7 +131,8 @@
 
                             spoor {!! $ts->ArrivalPlatform !!}
                             </br>
-                            {!! $ts->DepartureTime !!}
+                            {!! $ts->ArrivalTime !!}
+                            </br>
                         </h5>
                     </div>
 
@@ -72,6 +150,7 @@
                     </div>
                     <div class="col-md-7 col-xs-7">
                         <h5>
+
                             @foreach(end($route->Trains)->Stops->Stations as $station)
                                 @if($station->Name == $result->StepOff )
                           spoor {!! $station->Platform !!} <br>
@@ -89,7 +168,7 @@
 @endif
   @endforeach
 
-
+--}}
 
 
 @stop

@@ -28,4 +28,8 @@ Route::get('/about/', function () {
     return view('about');
 })->name('about');
 
+Route::get('/failed/', function () {
+    return view('failed');
+})->name('failed');
+
 Route::post('route', 'routeController@getRoutes');
