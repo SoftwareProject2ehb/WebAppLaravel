@@ -12,7 +12,7 @@
     @foreach($result->connection as $route)
     <div class="row">
         <div class="col-md-2 col-xs-5">
-            <h4><span class="glyphicon glyphicon-time status on-time"></span></h4>
+            <h4><span class="glyphicon glyphicon-time status {!! ($route->departure->delay !== "0" ? 'delayed' : 'on-time') !!}"></span></h4>
         </div>
 
 
@@ -29,7 +29,7 @@
             <div class="col-md-5 col-xs-5">
 
                 <h4>
-                    {!! $route->departure->stationinfo->standardname !!} ({!! $route->departure->vehicle  !!})
+                    {!! $route->departure->stationinfo->standardname !!} ({!! substr($route->departure->vehicle,8)  !!})
                 </h4>
 
             </div>
@@ -38,6 +38,10 @@
                     spoor {!! $route->departure->platform !!}
                     </br>
                     {!! gmdate('H:i',$route->departure->time) !!}
+                    @if($route->departure->delay !== "0")
+                       <span style="color:red"> +{!!gmdate('i',$route->departure->delay)  !!} min.</span>
+                    @endif
+
 
                 </h5>
             </div>
@@ -47,7 +51,7 @@
                 <div class="row">
                 <div class="col-md-5 col-xs-5" style="padding-left: 5em" >
                     <h5  >
-                        {!! $via->stationinfo->standardname !!} ({!! $via->vehicle !!})
+                        {!! $via->stationinfo->standardname !!} ({!! substr($via->vehicle,8) !!})
                     </h5>
                 </div>
 
