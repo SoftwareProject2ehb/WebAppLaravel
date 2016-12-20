@@ -14,11 +14,13 @@
         <div class="col-md-2 col-xs-5">
             <h4><span class="glyphicon glyphicon-time status {!! ($route->departure->delay !== "0" ? 'delayed' : 'on-time') !!}"></span></h4>
         </div>
-
+        <div class="col-md-5 col-xs-7">
+            <h4></h4>
+        </div>
 
 
         <div class="col-md-10 col-xs-7">
-            <h4>{!! $route->departure->stationinfo->standardname !!} , {!! $route->arrival->stationinfo->standardname !!}</h4>
+            <h4>{!! gmdate('d/m/Y',$route->departure->time) !!}</h4>
         </div>
     </div>
 
@@ -30,6 +32,7 @@
 
                 <h4>
                     {!! $route->departure->stationinfo->standardname !!} ({!! substr($route->departure->vehicle,8)  !!})
+
                 </h4>
 
             </div>

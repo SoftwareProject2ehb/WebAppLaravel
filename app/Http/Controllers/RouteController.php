@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\LastStop;
+use App\Utility;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -13,8 +13,15 @@ class RouteController extends Controller{
 
 public function getRoutes(Request $request)
 {
+
     $stepOn = $request->input('from');
     $stepOff = $request->input('to');
+    $date = $request->input('date');
+    $time= $request->input('time');
+    $timeSel= $request->input('radio');
+    $date =Utility::formatDate($date);
+    $time =Utility::formatTime($time);
+
 
     // check if string contains '/'
     if(strpos($stepOn, '/') !== false){
@@ -23,14 +30,14 @@ public function getRoutes(Request $request)
     if(strpos($stepOff, '/') !== false){
         $stepOff= strtok($stepOff,'/');
     }
-        echo ($stepOn.$stepOff);
-    $traintracksString = "?to=".$stepOff."&from=".$stepOn."&format=json";
+
+    $traintracksString = "?to=".$stepOff."&from=".$stepOn."&format=json"."&date=".$date."&time=".$time."&timeSel=".$timeSel;
 
     $client = new Client(['base_uri' => 'https://api.irail.be/connections/']);
 
     $result = null;
     try {
-        echo($traintracksString);
+
         $response = $client->request('GET', (string) $traintracksString, ['verify' => false]);
         $result = json_decode($response->getBody());
     } catch (ClientException $e) { } catch (ServerException $e) { }

@@ -31,29 +31,35 @@
                                 </select>
                         </div>
                     </div>
-                   <!--- <div class="row spaced">
+                  <div class="row spaced">
                         <div class="col-md-6 col-xs-0">
                         </div>
                         <div class="col-md-4 col-xs-7">
                             <label for="date">date</label>
                             <div class="input-group date" data-provide="datepicker">
-                                <input type="date" class="form-control" id="date" value="2016-11-28">
+                                <input type="date" class="form-control" id="date" name="date" value="<?php echo date('Y-m-d'); ?>">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-th"></span>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-2 col-xs-5">
                             <label for="time">time</label>
                             <div class="input-group date" data-provide="datepicker">
-                                <input type="time" class="form-control" id="time" value="11:15">
+                                <input type="time" class="form-control" id="time" name="time" value="<?php echo date('g:i'); ?>">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    -->
+
+                    <label for="selector"></label>
+                    <div class="input-group radio" >
+                        <input type="radio" name="radio" value="arrive" checked> aankomen </br>
+                        <input type="radio" name="radio" value="depart"> vertrekken
+                    </div>
                     <div class="row spaced">
                         <div class="col-md-6"></div>
                         <div class="col-md-6">
@@ -72,5 +78,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script> 
         <script src="./js/csv/jquery-csv/src/jquery.csv.min.js" ></script>
         <script src="./js/csv/csvread.js" charset="utf-8"></script>
+
 
 @stop
