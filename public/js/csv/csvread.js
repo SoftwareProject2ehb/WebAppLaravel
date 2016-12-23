@@ -17,12 +17,23 @@ function readTextFile(file)
                 for(i=1;i<data.length;i++){
                     html+="<option data-tokens='" +data[i][1]+ "' >"+data[i][1]+"</option>";
                 }
-                document.getElementById("from").innerHTML= html;
-                document.getElementById("to").innerHTML= html;
-                $('#from').selectpicker('refresh');
-                $('#to').selectpicker('refresh');
-                $('#from').selectpicker('val', 'Brussel-Zuid/Bruxelles-Midi');
-                $('#to').selectpicker('val', 'Antwerpen-Centraal');       
+
+                if(document.body.contains( document.getElementById("from"))){
+                    document.getElementById("from").innerHTML= html;
+                    $('#from').selectpicker('refresh');
+                    $('#from').selectpicker('val', 'Brussel-Zuid/Bruxelles-Midi');
+                }
+
+                if(document.body.contains( document.getElementById("to"))){
+                    document.getElementById("to").innerHTML= html;
+                    $('#to').selectpicker('refresh');
+                    $('#to').selectpicker('val', 'Antwerpen-Centraal');
+                }
+
+
+
+
+
                 }
             } 
         }

@@ -32,4 +32,9 @@ Route::get('/failed/', function () {
     return view('failed');
 })->name('failed');
 
+Route::get('/liveboard/', function () {
+    return view('liveboard');
+})->name('liveboard');
+
 Route::post('route', 'routeController@getRoutes');
+Route::post('liveboard', 'LiveboardController@getBoard');

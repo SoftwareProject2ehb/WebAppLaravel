@@ -10,8 +10,7 @@
 
 @section ('content')
 
-kapot lol
-
+<h1> Er ging iets mis</h1>
 @stop
 
 @section ('footer')
