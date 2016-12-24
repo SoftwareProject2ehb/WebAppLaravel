@@ -61,7 +61,7 @@
 			</table>
 		</div>
 				@else
-				<h1>er zijn geen treinen gevonden</h1>
+				<h1>There are no trains at this time</h1>
 
 				@endif
 		@endif
