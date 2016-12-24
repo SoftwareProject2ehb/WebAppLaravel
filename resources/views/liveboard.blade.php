@@ -16,7 +16,7 @@
 			<div class="form-group">
 				<div class="row ">
 					<div class="col-md-6 col-xs-12">
-						<label for="from">Selecteer station</label>
+						<label for="from">Select a station</label>
 						<select class="selectpicker form-control "  type="text" id="from" name="from" data-live-search="true">
 
 						</select>
@@ -42,10 +42,10 @@
 			<table class="table table-striped" id="liveboard">
 				<thead>
 				<tr>
-					<th>Perron</th>
-					<th>Bestemming</th>
-					<th>Vertrek</th>
-					<th>Vertraging</th>
+					<th>Platform</th>
+					<th>Destination</th>
+					<th>Departure Time</th>
+					<th>Delay</th>
 				</tr>
 				</thead>
 				@foreach($result->departures->departure as $departure)

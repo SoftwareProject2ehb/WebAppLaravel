@@ -57,8 +57,8 @@
 
                     <label for="selector"></label>
                     <div class="input-group radio" >
-                        <input type="radio" name="radio" value="arrive" checked> aankomen </br>
-                        <input type="radio" name="radio" value="depart"> vertrekken
+                        <input type="radio" name="radio" value="arrive" checked> Arrive </br>
+                        <input type="radio" name="radio" value="depart"> Depart
                     </div>
                     <div class="row spaced">
                         <div class="col-md-6"></div>

@@ -28,7 +28,7 @@
                     <ul class="nav navbar-nav">
                         <li class="{{ Request::is('route')  || Request::is('/') ? 'active' : '' }}"><a href="{{ route('home')}}">Search Trains </a>  <span class="sr-only">(current)</span></a></li>
 
-
+                        <li class=" {!! (Request::is('liveboard') ? 'active' : '') !!}"><a href="{{ route('liveboard')}}">Liveboard </a> </li>
                         <li class=" {!! (Request::is('tickets') ? 'active' : '') !!}"><a href="{{ route('tickets')}}">Tickets </a> </li>
                         <li class=" {!! (Request::is('about') ? 'active' : '') !!}"><a href="{{ route('about')}}">About</a></li>
                     </ul>
