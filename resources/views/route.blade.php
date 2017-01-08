@@ -9,7 +9,7 @@
 @stop
 
 @section ('content')
-    
+
         <div id="search" class="container-fluid">
             <div class="container">
                 <h1>Search Trains</h1>
@@ -33,6 +33,11 @@
                     </div>
                   <div class="row spaced">
                         <div class="col-md-6 col-xs-0">
+                            <label for="selector"></label>
+                            <div class="input-group radio" >
+                                <input type="radio" name="radio" value="arrive" checked> Arrive </br>
+                                <input type="radio" name="radio" value="depart"> Depart
+                            </div>
                         </div>
                         <div class="col-md-4 col-xs-7">
                             <label for="date">date</label>
@@ -55,11 +60,7 @@
                         </div>
                     </div>
 
-                    <label for="selector"></label>
-                    <div class="input-group radio" >
-                        <input type="radio" name="radio" value="arrive" checked> Arrive </br>
-                        <input type="radio" name="radio" value="depart"> Depart
-                    </div>
+
                     <div class="row spaced">
                         <div class="col-md-6"></div>
                         <div class="col-md-6">
